@@ -1,0 +1,64 @@
+<!doctype html>
+<html><head>
+</head><body>
+    
+    <img src="https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+    <img src="http://mmbiz.qpic.cn/mmbiz/MibWbneGeQO31eI1LnYaVB1IZVRZCdRia3Ar0dO93ghz404LesGhJ0LwaSep45NasOic7uf7qGfjFpuO7j0SnpuCg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+    <img src="http://h.hiphotos.baidu.com/image/pic/item/f703738da97739123c13c760fa198618367ae2fe.jpg">
+    <img src="http://f.hiphotos.baidu.com/image/pic/item/8d5494eef01f3a29d8ee7f929b25bc315c607c4c.jpg">
+    <img src="http://e.hiphotos.baidu.com/image/pic/item/8b13632762d0f7038d0eafd20afa513d2697c57b.jpg">
+    <img src="http://c.hiphotos.baidu.com/image/pic/item/4a36acaf2edda3cc56adc15903e93901213f9279.jpg">
+    <img src="http://d.hiphotos.baidu.com/image/pic/item/c2fdfc039245d688d7f34ecda6c27d1ed31b24e1.jpg">
+    <img src="http://g.hiphotos.baidu.com/image/pic/item/241f95cad1c8a786a7d435776509c93d71cf50c8.jpg">
+    <img src="http://b.hiphotos.baidu.com/image/pic/item/4610b912c8fcc3ce7a6cf33d9045d688d43f200b.jpg">
+    
+</body></html>
+
+<script>
+    
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            callback(WebViewJavascriptBridge)
+        } else {
+            document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                                      callback(WebViewJavascriptBridge)
+                                      }, false)
+        }
+    }
+
+connectWebViewJavascriptBridge(function(bridge) {
+                               
+                               var imgs = document.getElementsByTagName("img")
+                               
+                               bridge.init(function(message, responseCallback) {
+                                           responseCallback(message)
+                                           })
+                               
+                               var responseData = new Array()
+                               for (i = 0; i < imgs.length; i++) {
+                               var img = imgs[i]
+                               responseData.push(img.src)
+                               
+                               img.sid = "" + i
+                               img.onclick = function(e) {
+                               e = e || window.event;
+                               var t = e.target || e.srcElement;
+                               var data = t.sid
+                               bridge.callHandler('clickImage', data, function(response) {})
+                               }
+                               }
+                               bridge.send(responseData)
+                               
+                               bridge.registerHandler('imageList', function(data, responseCallback) {
+                                                      var responseData = new Array()
+                                                      for (i = 0; i < imgs.length; i++) {
+                                                      var img = imgs[i]
+                                                      responseData.push(img.src)
+                                                      }
+                                                      responseCallback(responseData)
+                                                      })
+                               })
+                               
+                               
+    </script>
+
