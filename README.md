@@ -3,7 +3,7 @@
 
 	swift与javascript之间进行消息通信
 	
-参考OC版本: [marcuswestin/WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) 来实现的
+参考OC版本: [marcuswestin/WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) 来实现的，仅供学习用。
 
 ## 发现的问题
 
