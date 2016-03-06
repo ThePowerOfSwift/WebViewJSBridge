@@ -42,6 +42,8 @@ class ViewController: UIViewController {
 //        
 //        loadExamplePage(webView)
         
+        WebViewJSBridge.bridgeForWebView(<#T##webView: UIWebView##UIWebView#>, messageHandler: <#T##WVJBHandler##WVJBHandler##(data: AnyObject, responseCallback: WVJBResponseCallback) -> Void#>)
+        
         bridge = WebViewJSBridge.bridgeForWebView(webView, webViewDelegate: self, resourceBundle: nil) { data, responseCallback in
             NSLog("ObjC received message from JS: \(data)")
             responseCallback(responseData: "Response for message from ObjC")
